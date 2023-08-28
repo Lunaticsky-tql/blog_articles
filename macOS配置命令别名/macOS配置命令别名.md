@@ -91,7 +91,7 @@ source ~/.zshrc
 vim /etc/profile.d/aliases.sh # 编辑aliases文件
 ```
 
-![image-20230128114429306](/Users/tianjiaye/临时文稿/gather_md/macOS配置命令别名.assets/20230128114558552930_510_image-20230128114429306.png)
+![image-20230128114429306](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/macOS%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D/20230828210441159140_423_20230128114558552930_510_image-20230128114429306.png)
 
 文件中已经给出了一些实例，按需添加即可，比如可以将常用的脚本添加进来。
 
