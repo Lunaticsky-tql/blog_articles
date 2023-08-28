@@ -3,9 +3,6 @@ title: 重新认识HTTP(一)
 categories: 笔记
 tags:
   - 寄网
-abbrlink: 43947
-date: 2023-08-27 19:59:40
-
 ---
 
 # 重新认识HTTP(一)
