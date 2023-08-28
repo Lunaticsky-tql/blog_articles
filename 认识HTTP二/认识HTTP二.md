@@ -39,7 +39,7 @@ date: 2023-08-26 16:06:51
 
 下面以客户端获取一个含有两个图片的网页为例说明比较HTTP1.0和HTTP1.1：
 
-![image-20230825212013023](/Users/tianjiaye/临时文稿/gather_md/认识HTTP二.assets/20230825233745413813_440_image-20230825212013023.png)
+![image-20230825212013023](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230828205258987659_478_20230825233745413813_440_image-20230825212013023.png)
 
 
 
@@ -227,7 +227,7 @@ Basic 内容为： **用户名:密码** 的base64形式，如`lunaticsky:tqla314
 
 另外还有很多其他原因，比如这种基本认证浏览器会弹出一个弹窗要求用户输入用户名和密码，不能进行定制，用户体验不好。
 
-![image-20230825225412200](/Users/tianjiaye/临时文稿/gather_md/认识HTTP二.assets/20230826160646173640_409_image-20230825225412200.png)
+![image-20230825225412200](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230828205300371135_814_20230826160646173640_409_image-20230825225412200.png)
 
 #### Session认证
 
