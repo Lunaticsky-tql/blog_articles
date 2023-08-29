@@ -1,9 +1,9 @@
 ---
-title: 重新认识HTTP/2
+title: 重新认识HTTP2
 categories: 笔记
 tags:
   - 寄网
-date: 2023-08-29 14:27:14
+date: 2023-08-29 21:35:37
 ---
 # 重新认识HTTP/2
 
@@ -15,11 +15,13 @@ HTTP/1.1 链接需要请求以正确的顺序发送，理论上可以用一些�
 
 <img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142651995802_532_image-20230828223930304.png" alt="image-20230828223930304" width="67%" height="67%" />
 
-为此，在 2010 年早期，谷歌通过实践了一个实验性的 SPDY  协议。这种在客户端和服务器端交换数据的替代方案引起了在浏览器和服务器上工作的开发人员的兴趣。明确了响应数量的增加和解决复杂的数据传输，SPDY  成为了 HTTP/2 协议的基础。
+为此，在 2010 年早期，谷歌通过实践了一个实验性的 SPDY  协议。SPDY并不是字母缩略词，而仅仅是"speedy"的缩写。它是对HTTP协议的增强，包括数据流的多路复用、请求优先级以及HTTP报头压缩等。事实上这就是HTTP/2所主要新增的内容。不过一开始，SPDY并不用于取代HTTP，它只是修改了HTTP的请求与应答在网络上传输的方式；这意味着只需增加一个SPDY传输层，现有的所有服务端应用均不用做任何修改。后来，SPDY的成果被采纳而最终演变为HTTP/2。
+
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829213505935335_240_image-20230829212355918.png" alt="image-20230829212355918" width="50%" height="50%" />
 
 HTTP/2 在 HTTP/1.1 有几处基本的不同：
 
-- HTTP/2 是二进制协议而不是文本协议。不再可读，也不可无障碍的手动创建，改善的优化技术现在可被实施。
+- HTTP/2 是二进制协议而不是文本协议。不再可读，也不可无障碍的手动创建。
 - 这是一个多路复用协议。并行的请求能在同一个链接中处理，移除了 HTTP/1.x 中顺序和阻塞的约束。
 - 压缩了标头。因为标头在一系列请求中常常是相似的，其移除了重复和传输重复数据的成本。
 - 其允许服务器在客户端缓存中填充数据，通过服务器推送的机制来提前请求。
@@ -28,7 +30,7 @@ HTTP/2 在 HTTP/1.1 有几处基本的不同：
 
 ## 实践基础
 
-首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样，若不启用HTTPS，是可以用wireshark抓到明文包的。
+首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样若不启用HTTPS，是可以用wireshark抓到明文包的。
 
 但是，我们也不是没有办法。毕竟我们从浏览器的F12中就能看到HTTP/2的一些信息的，浏览器知道怎么解密这些信息。是的，否则我们也无法看到想看到的页面。
 
@@ -66,7 +68,9 @@ sudo tcpdump host 103.144.218.5 -w mydump.pcap
 
 以我自己的电脑为例，在终端输入`ifconfig`，查看wifi对应网卡的ip地址，如下所示：
 
-![image-20230829103603439](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142654100695_258_image-20230829103603439.png)
+![image-20230829212654935](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829213511943925_465_image-20230829212654935.png)
+
+可以看到ip地址为`10.136.68.170`。后文中用“客户端”指代。
 
 ## HTTP2协商
 
