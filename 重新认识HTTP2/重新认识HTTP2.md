@@ -1,3 +1,10 @@
+---
+title: 重新认识HTTP/2
+categories: 笔记
+tags:
+  - 寄网
+date: 2023-08-29 14:27:14
+---
 # 重新认识HTTP/2
 
 可以说，我们浏览网页，下载资源，甚至克隆一个感兴趣的github仓库，都在与HTTP协议打交道。但是，在计算机网络课程和考研中HTTP都不作为重点去讲述，而在面试和实际工作中却经常需要接触。因此更深入的了解HTTP协议显得尤为重要。[上一节](https://lunaticsky-tql.github.io/posts/43947/)从HTTP的起源开始，重点深入探讨了HTTP/1.1新增特性的一些细节。本节将继续深入剖析HTTP/2的重要特性，并结合实践进行分析。
@@ -6,7 +13,7 @@
 
 HTTP/1.1 链接需要请求以正确的顺序发送，理论上可以用一些并行的链接（尤其是 5 到 8 个），但是带来的成本和复杂性堪忧。比如，HTTP  管线化（pipelining）就成为了 Web 开发的负担。如下图的形式，浏览器同时建立了5个TCP连接，这样确实可以“并行”的获取资源，避免了前面提到的队头阻塞问题，但每一次TCP都要三次握手四次挥手，而且内存要同时为5个链接开辟缓冲区，未免有些太浪费计算和存储资源。
 
-<img src="重新认识HTTP2.assets/image-20230828223930304.png" alt="image-20230828223930304" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142651995802_532_image-20230828223930304.png" alt="image-20230828223930304" width="67%" height="67%" />
 
 为此，在 2010 年早期，谷歌通过实践了一个实验性的 SPDY  协议。这种在客户端和服务器端交换数据的替代方案引起了在浏览器和服务器上工作的开发人员的兴趣。明确了响应数量的增加和解决复杂的数据传输，SPDY  成为了 HTTP/2 协议的基础。
 
@@ -55,11 +62,11 @@ sudo tcpdump host 103.144.218.5 -w mydump.pcap
 
 菜单: preferences -> Protocols -> TLS
 
-![image-20230828224802757](重新认识HTTP2.assets/image-20230828224802757.png)
+![image-20230828224802757](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142653033344_250_image-20230828224802757.png)
 
 以我自己的电脑为例，在终端输入`ifconfig`，查看wifi对应网卡的ip地址，如下所示：
 
-![image-20230829103603439](重新认识HTTP2.assets/image-20230829103603439.png)
+![image-20230829103603439](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142654100695_258_image-20230829103603439.png)
 
 ## HTTP2协商
 
@@ -103,19 +110,19 @@ Upgrade: h2c
 
 这一点怎么验证呢？ALPN拓展是在TLS的Say Hello阶段的。我们找到它：
 
-![image-20230829105143660](重新认识HTTP2.assets/image-20230829105143660.png)
+![image-20230829105143660](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142655503186_353_image-20230829105143660.png)
 
 最后一行就是。
 
 然后点开`Transmission Control Protocol`即TLS，然后找到`Handshake Protocol:Client Hello`，点开就可以看到一堆拓展。然后我们就能看到ALPN了。
 
-![image-20230829105347601](重新认识HTTP2.assets/image-20230829105347601.png)
+![image-20230829105347601](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142656507459_485_image-20230829105347601.png)
 
 分析得知，浏览器在进行SSL连接，第一次发送Client Hello包时，在扩展字段里携带浏览器支持的版本，其中 h2 代表浏览器支持http2协议。
 
 相应的，服务器在返回Server Hello包时，如果服务器支持http 2，则会返回h2，如果不支持，则从客户端支持的协议列表中选取一个它支持的协议，一般为http/1.1。
 
-![image-20230829105644589](重新认识HTTP2.assets/image-20230829105644589.png)
+![image-20230829105644589](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142657588930_231_image-20230829105644589.png)
 
 
 
@@ -123,7 +130,7 @@ Upgrade: h2c
 
 Connection Preface 的开头是一个固定的字节序列(可以认为这是一个魔数, 一般在设计网络协议时都会设置一个魔数以过滤掉不支持的数据), 这个值用字符串表示为 `PRI *  HTTP/2.0\r\n\r\nSM\r\n\r\n`, 在此序列后跟随发送一个可选的 SETTINGS frame,  其中可以设置一些协议参数(将在下面讨论), 服务端的 Connection Preface 不需要魔数, 但同样需要包含一个可选的  SETTINGS frame 用于设置服务端的协议参数, 无论是客户端还是服务端, 当收到不合法的 Connection Preface  都需要报告连接错误。
 
-![image-20230829110305712](重新认识HTTP2.assets/image-20230829110305712.png)
+![image-20230829110305712](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142658796661_863_image-20230829110305712.png)
 
 ## HTTP/2 Stream
 
@@ -133,7 +140,7 @@ Connection Preface 的开头是一个固定的字节序列(可以认为这是一
 
 在 frame 的结构中我们看到,  frame header 中有 Stream Identifier 字段, 用于指示该 frame 所属的 Stream 序号, 当一个  Stream Identifier 为 N 的 frame 在 TCP 链路上传输时, 我们就可以认为它是在 Stream N 上传输.  Stream 需要由一方主动创建, [RFC 7540](https://link.zhihu.com/?target=https%3A//tools.ietf.org/html/rfc6455) 要求**由客户端初始化的 Stream, 其编号 (即 Identifier) 必须是奇数, 而由服务端初始化的 Stream,  其编号必须是偶数**。特别地, 编号为 0 的 Stream 是用来传输整个 (TCP) 连接的控制消息的。
 
-![image-20230829112913643](重新认识HTTP2.assets/image-20230829112913643.png)
+![image-20230829112913643](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142659977825_226_image-20230829112913643.png)
 
 在 HTTP/2 中, 每一个新创建的 Stream 的编号必须比已有的所有的 Stream 的编号都大, 当使用新编号的 Stream 时,  所有低于该编号的并且处于空闲 (Idle) 状态的 Stream 都会被隐式的关闭, 在一个 TCP 链接中, 流编号不能重复使用, 即新创建的 Stream 编号不能是之前用过的编号(即便是之前用过的编号并且已关闭也不允许再使用), 在 frame 中, 由于流编号只有 31 位,  因此对于一个 TCP 长连接来说, 存在流编号被用光的情形, 当流编号用尽时, 如果需要再创建一个新的 Stream, 对于客户端来说,  可以创建一个新的 TCP 连接, 对于服务端来说, 可以向客户端发送一个 GOAWAY frame, 强制客户端打开新的一个 TCP 连接。
 
@@ -141,7 +148,7 @@ Connection Preface 的开头是一个固定的字节序列(可以认为这是一
 
 Flags 字段可以用来控制帧的状态。下图展示了一个流的生命周期。
 
-![image-20230829115727462](重新认识HTTP2.assets/image-20230829115727462.png)
+![image-20230829115727462](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142701018586_639_image-20230829115727462.png)
 
 其中`PUSH_PROMISE`帧是一种特殊类型的帧，用于服务器推送资源给客户端。**HTTP/2的推送机制**允许服务器在响应一个客户端请求时，主动推送其他相关的资源给客户端，从而提前加载可能需要的资源，以改善页面加载性能和用户体验。
 
@@ -184,15 +191,15 @@ HTTP/2 在单个 TCP 连接上虚拟出多个 Stream, 多个 Stream 实现对一
 
 比如，下面请求CDN上相关js和css文件。
 
-![image-20230829141914005](重新认识HTTP2.assets/image-20230829141914005.png)
+![image-20230829141914005](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142702230552_298_image-20230829141914005.png)
 
 第一份javascript文件不指明依赖流，权重最高。
 
-![image-20230829142038049](重新认识HTTP2.assets/image-20230829142038049.png)
+![image-20230829142038049](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142705943679_812_image-20230829142038049.png)
 
 后面几个流依次依赖前面的流。
 
-![image-20230829142143613](重新认识HTTP2.assets/image-20230829142143613.png)
+![image-20230829142143613](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142707262834_965_image-20230829142143613.png)
 
 CSS文件流是js文件流的从属流，权重较低。
 
@@ -202,7 +209,7 @@ CSS文件流是js文件流的从属流，权重较低。
 
 在 HTTP/2 中, frame 是客户端和服务端数据传输的最小单元, 当 HTTP/2  Connection Preface 都发送校验完毕之后, 双方就可以正式开始以 frame 的形式进行数据交换, frame 由 Header 和 Payload 两部分构成, 其中 Header (注意区分 frame 的 Header 和 HTTP 协议本身的 Header)  的长度固定为 9 字节, Payload 的长度是可变的, frame 的结构[如下所示](https://datatracker.ietf.org/doc/html/rfc7540#page-12):
 
-![image-20230829110616241](重新认识HTTP2.assets/image-20230829110616241.png)
+![image-20230829110616241](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142708629121_799_image-20230829110616241.png)
 
 - Length 字段长度为 3 字节, 以字节为单位指示 frame 的 Payload 的长度(即该字段指示的长度不包含 9 字节的 frame header)
 - Type 字段长度为 1 字节, 指示 frame 的类型
@@ -214,11 +221,11 @@ CSS文件流是js文件流的从属流，权重较低。
 
 以下面这个`SETTING`帧为例。这是一个没有载荷的SETTING帧，是客户端向服务器发ACK。
 
-![image-20230829111247968](重新认识HTTP2.assets/image-20230829111247968.png)
+![image-20230829111247968](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142709689208_586_image-20230829111247968.png)
 
 ### DATA frame
 
-![image-20230829123200882](重新认识HTTP2.assets/image-20230829123200882.png)
+![image-20230829123200882](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142710882929_634_image-20230829123200882.png)
 
 我们看到第一个字段是`Pad Length`。它是干什么的呢？frame 可以选择性的传输 padding, padding 用于隐藏实际的 payload 长度，以便达到**隐私保护**的目的。观察者可能通过观察数据包大小来推测出某些请求的内容。通过在帧中添加填充数据，可以使所有请求的数据包大小相似，从而增强用户数据的隐私保护。
 
@@ -228,7 +235,7 @@ CSS文件流是js文件流的从属流，权重较低。
 
 以下面这个博客css文件的DATA帧为例，就没有padding。
 
-![image-20230829123341595](重新认识HTTP2.assets/image-20230829123341595.png)
+![image-20230829123341595](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142711803565_423_image-20230829123341595.png)
 
 前面讲到了流的生命周期，DATA frame 只能在状态为 open 或 half-closed (remote) 状态的 Stream 上发送, 当接收方收到不属于这两种状态的 Stream 的 DATA frame 时, 应立即报告 `STREAM_CLOSED` 的 `Stream Error`
 
@@ -236,7 +243,7 @@ CSS文件流是js文件流的从属流，权重较低。
 
 HEADERS frame 用来初始化一个新的 Stream 或传输 HTTP/2 Header Block (将在下面讨论), Header frame 的 frame type 为 0x1, 它的 Payload 结构[如下所示](https://datatracker.ietf.org/doc/html/rfc7540#page-32):
 
-![image-20230829114341902](重新认识HTTP2.assets/image-20230829114341902.png)
+![image-20230829114341902](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142713340881_806_image-20230829114341902.png)
 
 `Pad Length`前面已经讲述过，不再赘述。
 
