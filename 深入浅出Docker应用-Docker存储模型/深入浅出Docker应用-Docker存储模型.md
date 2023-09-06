@@ -1,3 +1,10 @@
+---
+title: 深入浅出Docker应用-Docker存储模型
+categories: 笔记
+tags:
+  - Docker
+date: 2023-09-06 12:22:15
+---
 # 深入浅出docker应用-Docker存储模型
 
 ## 容器的配置和存储
@@ -21,7 +28,7 @@ echo $ECHO $NUM
 exit
 ```
 
-![image-20230905205658055](深入浅出docker应用-Docker存储模型.assets/image-20230905205658055.png)
+![image-20230905205658055](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122021966682_985_image-20230905205658055.png)
 
 2. 容器文件复制
 
@@ -36,7 +43,7 @@ docker cp local.txt file1:/local.txt
 docker exec file1 cat local.txt
 ```
 
-![image-20230905205826324](深入浅出docker应用-Docker存储模型.assets/image-20230905205826324.png)
+![image-20230905205826324](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122024468499_912_image-20230905205826324.png)
 
 3. 文件的挂载
 
@@ -47,7 +54,7 @@ docker run -itd --name file2 -v $(pwd)/local.txt:/mount.txt busybox
 docker exec file2 cat mount.txt
 ```
 
-![image-20230905210015001](深入浅出docker应用-Docker存储模型.assets/image-20230905210015001.png)
+![image-20230905210015001](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122028923771_476_image-20230905210015001.png)
 
 ### MYSQL镜像的基本用法
 
@@ -78,7 +85,7 @@ echo $MYSQL_ROOT_PASSWORD
 exit
 ```
 
-![image-20230905210810439](深入浅出docker应用-Docker存储模型.assets/image-20230905210810439.png)
+![image-20230905210810439](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122032462368_350_image-20230905210810439.png)
 
 2. 进入MySQL服务的控制台
 
@@ -89,7 +96,7 @@ docker exec -it mysql mysql -uroot -p
 [输入MYSQL密码]
 ```
 
-![image-20230905210931741](深入浅出docker应用-Docker存储模型.assets/image-20230905210931741.png)
+![image-20230905210931741](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122037142229_199_image-20230905210931741.png)
 
 3. MySQL控制台验证命令
 
@@ -112,7 +119,7 @@ exit
 
 首先我们先进入控制台，然后使用`show variables`命令查看设置前的属性值。可以发现属性值现在为`OFF`。
 
-![image-20230905212216832](深入浅出docker应用-Docker存储模型.assets/image-20230905212216832.png)
+![image-20230905212216832](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122041622614_523_image-20230905212216832.png)
 
 2. 复制修改配置文件
 
@@ -124,7 +131,7 @@ docker cp mysql:/etc/my.cnf /root/mysql/config/my.cnf
 cat /root/mysql/config/my.cnf
 ```
 
-![image-20230905212510404](深入浅出docker应用-Docker存储模型.assets/image-20230905212510404.png)
+![image-20230905212510404](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122046212049_831_image-20230905212510404.png)
 
 3. 当配置文件复制完毕后，我们使用vi编辑该文件，在[mysqld]段落的末尾添加如下内容，修改后的段落如下。
 
@@ -139,7 +146,7 @@ vi /root/mysql/config/my.cnf
 general_log = 1
 ```
 
-![image-20230905212718393](深入浅出docker应用-Docker存储模型.assets/image-20230905212718393.png)
+![image-20230905212718393](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122048592517_741_image-20230905212718393.png)
 
 ### 挂载MYSQL配置文件
 
@@ -168,7 +175,7 @@ show variables like 'general_log';
 exit
 ```
 
-![image-20230905213126926](深入浅出docker应用-Docker存储模型.assets/image-20230905213126926.png)
+![image-20230905213126926](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122050783249_178_image-20230905213126926.png)
 
 ### 容器的文件系统挂载
 
@@ -192,7 +199,7 @@ docker run -itd --name share1 -v $(pwd)/share.txt:/share.txt busybox
 docker exec share1 cat /share.txt
 ```
 
-![image-20230905214440354](深入浅出docker应用-Docker存储模型.assets/image-20230905214440354.png)
+![image-20230905214440354](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122053619676_734_image-20230905214440354.png)
 
 2. 本地修改文件
 
@@ -203,7 +210,7 @@ echo '从宿主机中修改文件' >> share.txt
 docker exec share1 cat /share.txt
 ```
 
-![image-20230905214532760](深入浅出docker应用-Docker存储模型.assets/image-20230905214532760.png)
+![image-20230905214532760](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122056313837_145_image-20230905214532760.png)
 
 3. 容器中修改文件
 
@@ -214,7 +221,7 @@ docker exec share1 sh -c "echo '从容器中修改文件' >> /share.txt"
 cat share.txt
 ```
 
-![image-20230905214555887](深入浅出docker应用-Docker存储模型.assets/image-20230905214555887.png)
+![image-20230905214555887](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122100915140_351_image-20230905214555887.png)
 
 ### 挂载的权限配置
 
@@ -236,7 +243,7 @@ docker exec share-readonly cat /share.txt
 
 > 注：`>`：覆盖重定向，`>>`：追加重定向
 
-![image-20230905215029607](深入浅出docker应用-Docker存储模型.assets/image-20230905215029607.png)
+![image-20230905215029607](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122106103843_206_image-20230905215029607.png)
 
 2. 验证只读权限
 
@@ -249,7 +256,7 @@ docker exec share-readonly sh -c "echo '从只读容器中修改文件' >> /shar
 cat share.txt
 ```
 
-![image-20230905215129674](深入浅出docker应用-Docker存储模型.assets/image-20230905215129674.png)
+![image-20230905215129674](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122108599300_956_image-20230905215129674.png)
 
 3. 多个容器同时挂载一个文件
 
@@ -268,7 +275,7 @@ cat share.txt
 docker exec share-readonly cat /share.txt
 ```
 
-![image-20230905220547182](深入浅出docker应用-Docker存储模型.assets/image-20230905220547182.png)
+![image-20230905220547182](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122113368297_956_image-20230905220547182.png)
 
 ### 文件夹的挂载
 
@@ -301,7 +308,7 @@ docker build -t folder .
 docker run -itd --name folder1 -v $(pwd)/mount:/mount folder
 ```
 
-![image-20230905221232424](深入浅出docker应用-Docker存储模型.assets/image-20230905221232424.png)
+![image-20230905221232424](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122116918938_377_image-20230905221232424.png)
 
 3. 验证文件夹挂载
 
@@ -310,7 +317,7 @@ docker exec folder1 ls /mount
 docker exec folder1 cat /mount/host
 ```
 
-![image-20230905221441505](深入浅出docker应用-Docker存储模型.assets/image-20230905221441505.png)
+![image-20230905221441505](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122119641893_184_image-20230905221441505.png)
 
 ### Apache挂载案例
 
@@ -338,7 +345,7 @@ docker run -itd --name file_server1 -p 8000:80 \
 curl 127.0.0.1:8000
 ```
 
-![image-20230905221837730](深入浅出docker应用-Docker存储模型.assets/image-20230905221837730.png)
+![image-20230905221837730](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122121908293_573_image-20230905221837730.png)
 
 3. 动态修改网页
 
@@ -352,7 +359,7 @@ curl 127.0.0.1:8000
 curl 127.0.0.1:8000/host.html
 ```
 
-![image-20230905221908534](深入浅出docker应用-Docker存储模型.assets/image-20230905221908534.png)
+![image-20230905221908534](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122125472121_394_image-20230905221908534.png)
 
 ## 容器中的volume卷
 
@@ -386,7 +393,7 @@ docker exec vol1 ls /file
 docker exec vol1 cat /file/text
 ```
 
-![image-20230905222708156](深入浅出docker应用-Docker存储模型.assets/image-20230905222708156.png)
+![image-20230905222708156](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122128026982_637_image-20230905222708156.png)
 
 3. 查看volume信息
 
@@ -396,7 +403,7 @@ docker exec vol1 cat /file/text
 docker volume inspect file-vol
 ```
 
-![image-20230905222835618](深入浅出docker应用-Docker存储模型.assets/image-20230905222835618.png)
+![image-20230905222835618](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122131531627_519_image-20230905222835618.png)
 
 ### Volume的持久化
 
@@ -414,7 +421,7 @@ docker rm -f vol1
 docker volume inspect file-vol
 ```
 
-![image-20230905223042132](深入浅出docker应用-Docker存储模型.assets/image-20230905223042132.png)
+![image-20230905223042132](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122135953291_496_image-20230905223042132.png)
 
 2. 重用volume
 
@@ -427,7 +434,7 @@ docker exec vol2 ls /file-other
 docker exec vol2 cat /file-other/text
 ```
 
-![image-20230905223318221](深入浅出docker应用-Docker存储模型.assets/image-20230905223318221.png)
+![image-20230905223318221](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122139537200_575_image-20230905223318221.png)
 
 3. volume的多重绑定
 
@@ -439,7 +446,7 @@ docker run -itd --name vol3 -v ext-vol:/ext -v file-vol:/file busybox
 docker inspect -f "{{json .Mounts}}" vol3 | jq
 ```
 
-![image-20230905223606048](深入浅出docker应用-Docker存储模型.assets/image-20230905223606048.png)
+![image-20230905223606048](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122144097385_795_image-20230905223606048.png)
 
 ### Volume的常用命令
 
@@ -458,7 +465,7 @@ docker system df -v --format=\
 {{.Name}} - {{.Size}}\n{{end}}{{end}}' 
 ```
 
-![image-20230905223927214](深入浅出docker应用-Docker存储模型.assets/image-20230905223927214.png)
+![image-20230905223927214](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122148633154_903_image-20230905223927214.png)
 
 2. 自动创建volume
 
@@ -469,7 +476,7 @@ docker run -itd --name vol4 -v auto-vol:/auto busybox
 docker inspect auto-vol
 ```
 
-![image-20230905224103151](深入浅出docker应用-Docker存储模型.assets/image-20230905224103151.png)
+![image-20230905224103151](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122153361471_217_image-20230905224103151.png)
 
 3. volume的自动删除
 
@@ -481,9 +488,9 @@ docker volume prune -a
 docker volume ls
 ```
 
-![image-20230905224733590](深入浅出docker应用-Docker存储模型.assets/image-20230905224733590.png)
+![image-20230905224733590](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122155893833_356_image-20230905224733590.png)
 
-![image-20230905224722864](深入浅出docker应用-Docker存储模型.assets/image-20230905224722864.png)
+![image-20230905224722864](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122158059102_164_image-20230905224722864.png)
 
 ### 在MySQL中使用Volume
 
@@ -500,7 +507,7 @@ docker run -itd --name mysql1 -v db-vol:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=[M
 docker exec -it mysql1 mysql -uroot -p[MYSQL密码]
 ```
 
-![image-20230905225110593](深入浅出docker应用-Docker存储模型.assets/image-20230905225110593.png)
+![image-20230905225110593](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122201439818_823_image-20230905225110593.png)
 
 2. 操作数据库
 
@@ -517,7 +524,7 @@ SELECT * FROM ali_tab;
 exit
 ```
 
-![image-20230905225127175](深入浅出docker应用-Docker存储模型.assets/image-20230905225127175.png)
+![image-20230905225127175](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122206199441_275_image-20230905225127175.png)
 
 3. 重用MySQL数据库
 
@@ -530,7 +537,7 @@ docker run -itd --name mysql2 -v db-vol:/var/lib/mysql \
 docker exec -it mysql2 mysql -uroot -p[MYSQL密码]
 ```
 
-![image-20230905225310167](深入浅出docker应用-Docker存储模型.assets/image-20230905225310167.png)
+![image-20230905225310167](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122208927409_686_image-20230905225310167.png)
 
 ```shell
 USE ali_db;
@@ -538,4 +545,4 @@ SELECT * FROM ali_tab;
 exit
 ```
 
-![image-20230905225330187](深入浅出docker应用-Docker存储模型.assets/image-20230905225330187.png)
+![image-20230905225330187](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/20230906122211511426_681_image-20230905225330187.png)
