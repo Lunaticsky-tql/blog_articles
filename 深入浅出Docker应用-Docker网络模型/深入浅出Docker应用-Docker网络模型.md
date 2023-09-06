@@ -1,3 +1,10 @@
+---
+title: 深入浅出Docker应用-Docker网络模型
+categories: 笔记
+tags:
+  - Docker
+date: 2023-09-06 12:16:35
+---
 # 深入浅出docker应用-Docker网络模型
 
 ## 容器的网络入门
@@ -63,7 +70,7 @@ docker exec check curl 127.0.0.1:8000
 docker rm -f check
 ```
 
-![image-20230905162033315](深入浅出docker应用-Docker网络模型.assets/image-20230905162033315.png)
+![image-20230905162033315](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115927011432_829_image-20230905162033315.png)
 
 ### 容器和宿主机中的网卡
 
@@ -80,7 +87,7 @@ docker inspect -f '{{.NetworkSettings.IPAddress }}' py1
 docker inspect -f '{{.NetworkSettings.IPAddress }}' py2
 ```
 
-![image-20230905162231861](深入浅出docker应用-Docker网络模型.assets/image-20230905162231861.png)
+![image-20230905162231861](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115930659188_491_image-20230905162231861.png)
 
 2. 多容器信息查询
 
@@ -93,7 +100,7 @@ docker ps -f "name=py" -q
 docker inspect -f '{{.Name}} {{.NetworkSettings.IPAddress }}' $(docker ps -f "name=py" -q) 
 ```
 
-![image-20230905163325242](深入浅出docker应用-Docker网络模型.assets/image-20230905163325242.png)
+![image-20230905163325242](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115935274383_307_image-20230905163325242.png)
 
 3. 宿主机的网卡信息 
 
@@ -103,7 +110,7 @@ docker inspect -f '{{.Name}} {{.NetworkSettings.IPAddress }}' $(docker ps -f "na
 ifconfig docker0
 ```
 
-![image-20230905163118101](深入浅出docker应用-Docker网络模型.assets/image-20230905163118101.png)
+![image-20230905163118101](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115939701805_748_image-20230905163118101.png)
 
 ### 容器和宿主机的连通性
 
@@ -120,7 +127,7 @@ ping -c 4 [py2容器IP]
 curl [py2容器IP]:8000
 ```
 
-![image-20230905162945636](深入浅出docker应用-Docker网络模型.assets/image-20230905162945636.png)
+![image-20230905162945636](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115944397056_252_image-20230905162945636.png)
 
 2. 容器之间的网络连接
 
@@ -134,7 +141,7 @@ curl [py2容器IP]:8000
 exit 
 ```
 
-![image-20230905163234783](深入浅出docker应用-Docker网络模型.assets/image-20230905163234783.png)
+![image-20230905163234783](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115949958075_213_image-20230905163234783.png)
 
 3. 容器的外网访问
 
@@ -142,7 +149,7 @@ exit
 
 > 注：可通过`netstat -rn`查看。
 >
-> ![image-20230905165716152](深入浅出docker应用-Docker网络模型.assets/image-20230905165716152.png)
+> ![image-20230905165716152](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115952557471_924_image-20230905165716152.png)
 
 这就意味着，如果容器的宿主机可以访问互联网，容器就可以通过宿主机的`docker0`网卡转发网络数据包访问互联网。为了验证我们进入py1容器的控制台，`ping`访问`aliyun.com`验证连通性，再通过`traceroute`命令验证容器访问外网的路径。会发现容器访问外网的第一条就是`docker0`网卡。
 
@@ -153,7 +160,7 @@ traceroute www.aliyun.com -w 0.1
 exit
 ```
 
-![image-20230905164231855](深入浅出docker应用-Docker网络模型.assets/image-20230905164231855.png)
+![image-20230905164231855](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115956774933_957_image-20230905164231855.png)
 
 ### 容器的端口映射
 
@@ -175,7 +182,7 @@ docker run -itd -p 8000 --name port2 py/http
 docker ps -f "name=port"
 ```
 
-![image-20230905164540108](深入浅出docker应用-Docker网络模型.assets/image-20230905164540108.png)
+![image-20230905164540108](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906115959456283_323_image-20230905164540108.png)
 
 2. 查看端口映射
 
@@ -187,7 +194,7 @@ docker port port1 8000
 docker port port2
 ```
 
-![image-20230905164647019](深入浅出docker应用-Docker网络模型.assets/image-20230905164647019.png)
+![image-20230905164647019](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906120003330128_908_image-20230905164647019.png)
 
 > 总结：配端口映射的时候是宿主:容器，查看时是容器 -> 宿主。
 
@@ -201,7 +208,7 @@ curl 127.0.0.1:18001 | head -n1
 curl 127.0.0.1:[port2宿主机端口]  | head -n1
 ```
 
-![image-20230905164942645](深入浅出docker应用-Docker网络模型.assets/image-20230905164942645.png)
+![image-20230905164942645](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906120005817916_620_image-20230905164942645.png)
 
 ## 容器的自定义网络
 
@@ -213,7 +220,7 @@ Bridge网络模式的网络架构，是一种类似家用路由器的NAT网络�
 
 当容器需要访问外网时，Docker通过网络地址转换（NAT）将内网对外的访问请求转发到宿主机的物理网卡实现外网访问。当外网需要访问容器中的服务时，Docker使用目标网络地址转换（DNAT）,实现容器的端口映射功能。
 
-<img src="深入浅出docker应用-Docker网络模型.assets/image-20230905171448071.png" alt="image-20230905171448071" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121438023132_943_image-20230905171448071.png" alt="image-20230905171448071" width="50%" height="50%" />
 
 1. 自定义Bridge网络
 
@@ -236,14 +243,14 @@ docker network ls
 docker inspect network1
 ```
 
-![image-20230905171940633](深入浅出docker应用-Docker网络模型.assets/image-20230905171940633.png)
+![image-20230905171940633](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121443459226_284_image-20230905171940633.png)
 
 ```shell
 ifconfig -s
 ifconfig br-[网络ID]
 ```
 
-![image-20230905172129476](深入浅出docker应用-Docker网络模型.assets/image-20230905172129476.png)
+![image-20230905172129476](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121448940363_596_image-20230905172129476.png)
 
 3. 加入自定义Bridge网络
 
@@ -254,7 +261,7 @@ docker run -itd --name busybox1 --network network1 --ip 192.168.0.101 busybox
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' busybox1
 ```
 
-![image-20230905172402430](深入浅出docker应用-Docker网络模型.assets/image-20230905172402430.png)
+![image-20230905172402430](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121454346633_249_image-20230905172402430.png)
 
 ### 多网络的连通性
 
@@ -270,7 +277,7 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' bus
 docker exec busybox2 ping 192.168.0.101 -w 1
 ```
 
-![image-20230905172614913](深入浅出docker应用-Docker网络模型.assets/image-20230905172614913.png)
+![image-20230905172614913](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121458521078_985_image-20230905172614913.png)
 
 2. 容器连接多网络
 
@@ -291,7 +298,7 @@ docker exec busybox2 ping 192.168.0.101 -w 1
 docker exec busybox2 ip addr
 ```
 
-![image-20230905173151504](深入浅出docker应用-Docker网络模型.assets/image-20230905173151504.png)
+![image-20230905173151504](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121502122637_753_image-20230905173151504.png)
 
 ### 容器中的域名解析
 
@@ -309,7 +316,7 @@ docker exec domain1 ping busybox1 -c1
 docker exec domain1 ping domain1 -c1
 ```
 
-![image-20230905173743604](深入浅出docker应用-Docker网络模型.assets/image-20230905173743604.png)
+![image-20230905173743604](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121505575156_739_image-20230905173743604.png)
 
 > 注：下面两条是为了验证 domain1 正确的加入到network1。
 
@@ -324,7 +331,7 @@ docker exec domain3 ping domain3 -c1
 docker exec domain3 ping domain4 -c1
 ```
 
-![image-20230905174021497](深入浅出docker应用-Docker网络模型.assets/image-20230905174021497.png)
+![image-20230905174021497](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121513885053_753_image-20230905174021497.png)
 
 > domain3和domain4在同一网络，验证通过动态DNS配置的容器名域名能够ping的通。
 
@@ -339,7 +346,7 @@ docker exec domain1 ping web -c1
 docker exec domain1 ping db -c1
 ```
 
-![image-20230905174308569](深入浅出docker应用-Docker网络模型.assets/image-20230905174308569.png)
+![image-20230905174308569](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121519436040_631_image-20230905174308569.png)
 
 ### 容器实现Nginx代理
 
@@ -362,9 +369,9 @@ curl $(docker inspect httpd1 -f {{.NetworkSettings.IPAddress}})
 
 > 注：该过程下载较慢，需要耐心等待。
 
-![image-20230905175352061](深入浅出docker应用-Docker网络模型.assets/image-20230905175352061.png)
+![image-20230905175352061](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121524109420_497_image-20230905175352061.png)
 
-![image-20230905175403597](深入浅出docker应用-Docker网络模型.assets/image-20230905175403597.png)
+![image-20230905175403597](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121529331977_884_image-20230905175403597.png)
 
 2. 编写Nginx配置文件
 
@@ -422,7 +429,7 @@ docker run -d --name proxy1 -p 8000:80 -p 8001:8001 -p 8002:8002 \
 --link python1 --link httpd1 proxy
 ```
 
-![image-20230905180422754](深入浅出docker应用-Docker网络模型.assets/image-20230905180422754.png)
+![image-20230905180422754](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121533471480_288_image-20230905180422754.png)
 
 5. 验证Nginx代理服务
 
@@ -434,7 +441,7 @@ curl 127.0.0.1:8001
 curl 127.0.0.1:8002
 ```
 
-![image-20230905180212999](深入浅出docker应用-Docker网络模型.assets/image-20230905180212999.png)
+![image-20230905180212999](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121539097331_620_image-20230905180212999.png)
 
 ## 容器的共享网络模型
 
@@ -450,7 +457,7 @@ curl 127.0.0.1:8002
 
 首先我们来看Docker中的Host网络模式的架构。在Host网络模式下，容器在创建之时，并不会创建虚拟网卡。而是共享使用宿主机的默认网卡，因此Host模式下，容器网卡的网络地址和宿主机网卡的网络地址一致。
 
-![host](深入浅出docker应用-Docker网络模型.assets/zfjcruuaylg7m_f3201d02623c49dc80d06754a0021d63.png)
+![host](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121542480155_579_zfjcruuaylg7m_f3201d02623c49dc80d06754a0021d63.png)
 
 在了解了Host网络模式之后，我们来看如何创建Host模式的容器。在上一个实验中我们学过可以通过`docker network ls`命令查看Docker网络。细心的同学可能会观察到，在Docker的默认网络中就包含一个`host网络`。这个网络的驱动使用的就是host。	
 
@@ -460,7 +467,7 @@ curl 127.0.0.1:8002
 
 接下来我们来验证Host网络模式中的容器和宿主机的网络设置。我们首先在宿主机中使用`ip addr`命令查看网卡IP。在宿主机中我们可以找到`默认网卡eth0`，和`docker默认Bridge网络docker0`。
 
-![image-20230905201850370](深入浅出docker应用-Docker网络模型.assets/image-20230905201850370.png)
+![image-20230905201850370](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121547691885_678_image-20230905201850370.png)
 
 3. 获得容器网卡配置
 
@@ -471,7 +478,7 @@ docker exec host1 ip addr
 ping [docker0 IP] -c1
 ```
 
-![image-20230905202117058](深入浅出docker应用-Docker网络模型.assets/image-20230905202117058.png)
+![image-20230905202117058](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121553078213_743_image-20230905202117058.png)
 
 ###  Host模型的python案例
 
@@ -492,7 +499,7 @@ bash -c "python -m http.server 8000"
 
 接下来我们在宿主机中也启动一个python内置的http服务，服务绑定端口`8001`。然后再容器和宿主机中通过`netstat`命令查看端口占用情况。会发现无论是宿主机还是容器host1，端口8000和8001都被占用了。
 
-![image-20230905202712250](深入浅出docker应用-Docker网络模型.assets/image-20230905202712250.png)
+![image-20230905202712250](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121558730303_763_image-20230905202712250.png)
 
 3. 访问容器服务
 
@@ -502,7 +509,7 @@ bash -c "python -m http.server 8000"
 curl 127.0.0.1:8000 | head -n1
 ```
 
-![image-20230905202812343](深入浅出docker应用-Docker网络模型.assets/image-20230905202812343.png)
+![image-20230905202812343](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121602244999_405_image-20230905202812343.png)
 
 ### Container网络模型
 
@@ -528,7 +535,7 @@ docker exec container1 ip addr
 docker exec container2 ip addr
 ```
 
-![image-20230905203100315](深入浅出docker应用-Docker网络模型.assets/image-20230905203100315.png)
+![image-20230905203100315](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121607764416_189_image-20230905203100315.png)
 
 3. 创建python服务
 
@@ -561,7 +568,7 @@ docker exec -it container1 sh
 printf "GET / HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8000
 ```
 
-![image-20230905203413825](深入浅出docker应用-Docker网络模型.assets/image-20230905203413825.png)
+![image-20230905203413825](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121613687049_409_image-20230905203413825.png)
 
 执行`exit`命令退出容器控制台。
 
@@ -577,7 +584,7 @@ printf "GET / HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8000
 
 redis是一个上手容易，使用简单的内存存储服务组件。通常被用来当作web服务的缓存组件来使用。首先我们来创建一个名为redis1的redis容器。当容器创建之后，我们可以通过`redis-cli`命令进入redis的控制台。
 
-![image-20230905204040328](深入浅出docker应用-Docker网络模型.assets/image-20230905204040328.png)
+![image-20230905204040328](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121619384406_970_image-20230905204040328.png)
 
 2. 初始化redis数据
 
@@ -593,7 +600,7 @@ get year
 exit
 ```
 
-![image-20230905204058709](深入浅出docker应用-Docker网络模型.assets/image-20230905204058709.png)
+![image-20230905204058709](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121623021954_340_image-20230905204058709.png)
 
 3. 安装Python的redis工具
 
@@ -604,7 +611,7 @@ docker run -itd --name python1 --network=container:redis1 python
 docker exec python1 pip install redis
 ```
 
-![image-20230905204353188](深入浅出docker应用-Docker网络模型.assets/image-20230905204353188.png)
+![image-20230905204353188](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121626357968_113_image-20230905204353188.png)
 
 4. 通过Python脚本调用redis
 
@@ -625,4 +632,4 @@ print(r.get('year'))
 exit()
 ```
 
-![image-20230905205150802](深入浅出docker应用-Docker网络模型.assets/image-20230905205150802.png)
+![image-20230905205150802](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/20230906121632033915_844_image-20230905205150802.png)
