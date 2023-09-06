@@ -1,3 +1,10 @@
+---
+title: 深入浅出Docker应用-Docker容器入门
+categories: 笔记
+tags:
+  - Docker
+date: 2023-09-06 11:51:53
+---
 # 深入浅出docker应用-Docker容器入门
 
 ## 写在前面
@@ -38,7 +45,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum list docker-ce --showduplicates | sort -r
 ```
 
-![image-20230904220149946](深入浅出docker应用-Docker容器入门.assets/image-20230904220149946.png)
+![image-20230904220149946](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113647495716_679_image-20230904220149946.png)
 
 1. 安装Docker应用 
 
@@ -48,7 +55,7 @@ docker依赖和docker源安装完成之后，我们就可以使用yum install do
 yum install -y docker-ce.x86_64 
 ```
 
-![image-20230904220307344](深入浅出docker应用-Docker容器入门.assets/image-20230904220307344.png)
+![image-20230904220307344](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113649155016_953_image-20230904220307344.png)
 
 安装成功之后，我们还需要通过systemctl start命令来启动docker服务
 
@@ -91,7 +98,7 @@ systemctl restart docker.service
 docker version
 ```
 
-![image-20230904220736850](深入浅出docker应用-Docker容器入门.assets/image-20230904220736850.png)
+![image-20230904220736850](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113759513071_319_image-20230904220736850.png)
 
 3. 服务启动之后，为了防止计算机重启之后docker服务被关闭，我们还可以通过systemctl enable命令将docker服务配置为开机自启动。（此步骤为可选操作）
 
@@ -113,7 +120,7 @@ docker run hello-world
 
 会发现屏幕上输出了Hello from Docker!信息。这个信息输出表示hello-world容器虚拟机启动成功。
 
-![image-20230904220824468](深入浅出docker应用-Docker容器入门.assets/image-20230904220824468.png)
+![image-20230904220824468](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113803659205_241_image-20230904220824468.png)
 
 2. 启动长期运行的bash容器
 
@@ -125,7 +132,7 @@ docker run hello-world
 docker run -it bash
 ```
 
-![image-20230904220909280](深入浅出docker应用-Docker容器入门.assets/image-20230904220909280.png)
+![image-20230904220909280](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113808950713_810_image-20230904220909280.png)
 
 3. bash容器的退出
 
@@ -136,7 +143,7 @@ pwd
 ls
 ```
 
-![image-20230904221015298](深入浅出docker应用-Docker容器入门.assets/image-20230904221015298.png)
+![image-20230904221015298](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113813340599_640_image-20230904221015298.png)
 
 如果希望退出bash容器，回到宿主机，我们在控制台中输入exit命令即可。
 
@@ -144,7 +151,7 @@ ls
 exit
 ```
 
-![image-20230904221027326](深入浅出docker应用-Docker容器入门.assets/image-20230904221027326.png)
+![image-20230904221027326](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113818586520_163_image-20230904221027326.png)
 
 在使用docker run命令运行容器时，我们会看到在容器运行之前，出现了Status: Downloaded newer image状态。这表示在容器虚拟机第一次运行时，会首先从远程容器源服务器中下载镜像到本地，然后才能在本地运行。
 
@@ -158,7 +165,7 @@ exit
 docker search ubuntu
 ```
 
-![image-20230904221056674](深入浅出docker应用-Docker容器入门.assets/image-20230904221056674.png)
+![image-20230904221056674](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113823028609_871_image-20230904221056674.png)
 
 
 
@@ -198,7 +205,7 @@ chmod 777 docker-tags
 docker pull ubuntu:jammy
 ```
 
-![image-20230904221220297](深入浅出docker应用-Docker容器入门.assets/image-20230904221220297.png)
+![image-20230904221220297](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113826463659_596_image-20230904221220297.png)
 
 接下来我们来拉取ubuntu的最新版本。
 
@@ -206,7 +213,7 @@ docker pull ubuntu:jammy
 docker pull ubuntu
 ```
 
-![image-20230904221246435](深入浅出docker应用-Docker容器入门.assets/image-20230904221246435.png)
+![image-20230904221246435](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113831522600_650_image-20230904221246435.png)
 
 当镜像源已经拉取到本地之后，我们可以通过docker images命令来查看已经拉取到的本地镜像。
 
@@ -214,7 +221,7 @@ docker pull ubuntu
 docker images
 ```
 
-![image-20230904221300207](深入浅出docker应用-Docker容器入门.assets/image-20230904221300207.png)
+![image-20230904221300207](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113834482846_648_image-20230904221300207.png)
 
 ## 容器启动和操作
 
@@ -242,7 +249,7 @@ docker ps -a
 
 注：换了一个服务器，因此只显示了一个
 
-![image-20230904222052915](深入浅出docker应用-Docker容器入门.assets/image-20230904222052915.png)
+![image-20230904222052915](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113838384667_198_image-20230904222052915.png)
 
 2. 创建指定名称的容器
 
@@ -255,7 +262,7 @@ docker create -it --name ubuntu-1 ubuntu
 docker ps -a
 ```
 
-![image-20230904222138404](深入浅出docker应用-Docker容器入门.assets/image-20230904222138404.png)
+![image-20230904222138404](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906113842660170_765_image-20230904222138404.png)
 
 3. 启动ubuntu容器
 
@@ -266,7 +273,7 @@ docker start ubuntu-1
 docker ps -a 
 ```
 
-![image-20230904222232252](深入浅出docker应用-Docker容器入门.assets/image-20230904222232252.png)
+![image-20230904222232252](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115032403100_490_image-20230904222232252.png)
 
 ### 容器的快速启动方式
 
@@ -281,7 +288,7 @@ docker run -itd --name ubuntu-2 ubuntu
 docker ps -a 
 ```
 
-![image-20230904222752630](深入浅出docker应用-Docker容器入门.assets/image-20230904222752630.png)
+![image-20230904222752630](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115035769165_650_image-20230904222752630.png)
 
 2. 操作已经创建的容器 
 
@@ -293,7 +300,7 @@ docker exec -it ubuntu-2 bin/bash
 
 ​	命令执行之后提示行提示符发生了改变。这说明当前用户所操作的已经是容器中的操作系统。
 
-![image-20230904222911314](深入浅出docker应用-Docker容器入门.assets/image-20230904222911314.png)
+![image-20230904222911314](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115038972707_654_image-20230904222911314.png)
 
 3. 创建一次性容器
 
@@ -310,7 +317,7 @@ exit
 docker ps -a 
 ```
 
-![image-20230904223136488](深入浅出docker应用-Docker容器入门.assets/image-20230904223136488.png)
+![image-20230904223136488](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115043608109_578_image-20230904223136488.png)
 
 ### 为容器安装命令行工具
 
@@ -328,7 +335,7 @@ docker run -it --name ubuntu-3 ubuntu
 lsb_release
 ```
 
-![image-20230904223327185](深入浅出docker应用-Docker容器入门.assets/image-20230904223327185.png)
+![image-20230904223327185](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115049222439_512_image-20230904223327185.png)
 
 1. 在容器中安装命令
 
@@ -352,7 +359,7 @@ docker run -itd --name busybox-1 busybox
 docker exec -it busybox-1 sh
 ```
 
-![image-20230904223513737](深入浅出docker应用-Docker容器入门.assets/image-20230904223513737.png)
+![image-20230904223513737](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115052365509_199_image-20230904223513737.png)
 
 容器创建成功之后，我们尝试ifconfig和vi命令发现已经内置在容器之中，不过需要注意的时busybox镜像并没有包含apt-get或者yum等自动包安装工具。因此和ubuntu或者centos镜像相比，安装新工具会比较繁琐。
 
@@ -381,7 +388,7 @@ vi a.txt
 lsb_release -a
 ```
 
-![image-20230904223838981](深入浅出docker应用-Docker容器入门.assets/image-20230904223838981.png)
+![image-20230904223838981](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115057562682_162_image-20230904223838981.png)
 
 接下来我们再用ifconfig命令查看宿主机网络信息。
 
@@ -389,7 +396,7 @@ lsb_release -a
 ifconfig
 ```
 
-![image-20230904225731155](深入浅出docker应用-Docker容器入门.assets/image-20230904225731155.png)
+![image-20230904225731155](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115101741869_245_image-20230904225731155.png)
 
 1. 查看容器信息
 
@@ -404,7 +411,7 @@ docker exec -it ubuntu-2 bin/bash
 lsb_release -a
 ```
 
-![image-20230904225509265](深入浅出docker应用-Docker容器入门.assets/image-20230904225509265.png)
+![image-20230904225509265](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115105385086_458_image-20230904225509265.png)
 
 我们接下来在查看容器的IP地址，（注意和宿主机网络信息的对比）
 
@@ -412,7 +419,7 @@ lsb_release -a
 ifconfig
 ```
 
-![image-20230904225756902](深入浅出docker应用-Docker容器入门.assets/image-20230904225756902.png)
+![image-20230904225756902](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115109519062_970_image-20230904225756902.png)
 
 可以感受到容器对环境的隔离效果。
 
@@ -449,7 +456,7 @@ nohup python3 -m http.server 8000 &
 curl 127.0.0.1:8000 
 ```
 
-![image-20230905102403283](深入浅出docker应用-Docker容器入门.assets/image-20230905102403283.png)
+![image-20230905102403283](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115112783989_685_image-20230905102403283.png)
 
 ### 访问容器中的应用
 
@@ -459,7 +466,7 @@ curl 127.0.0.1:8000
 
 在容器内部测试http服务成功后，接下来我们需要在宿主机中测试http服务。当容器创建之后，会自动创建属于容器自己的网卡和网络地址，并且保证容器的网卡可以和宿主机互相访问，因此我们先通过`ifconfig`命令来显示并记录`容器的ip地址`。然后退出容器的控制台。
 
-![image-20230905102632272](深入浅出docker应用-Docker容器入门.assets/image-20230905102632272.png)
+![image-20230905102632272](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115117023864_642_image-20230905102632272.png)
 
 2. 测试访问容器服务
 
@@ -469,7 +476,7 @@ curl 127.0.0.1:8000
 curl [容器IP]:8000 
 ```
 
-![image-20230905102847301](深入浅出docker应用-Docker容器入门.assets/image-20230905102847301.png)
+![image-20230905102847301](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115120768011_197_image-20230905102847301.png)
 
 再上一个步骤中我们通过宿主机访问了容器内的服务。除此之外我们还可以在宿主机中通过docker top命令来查看容器中正在运行的具体进程。其命令的语法为docker top 容器名。我们输入如下命令，可以看到ubuntu-3容器运行着2个进程，分别是bash控制台进程和python3http服务器进程。
 
@@ -477,7 +484,7 @@ curl [容器IP]:8000
 docker top ubuntu-3
 ```
 
-![image-20230905103123487](深入浅出docker应用-Docker容器入门.assets/image-20230905103123487.png)
+![image-20230905103123487](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115127139220_531_image-20230905103123487.png)
 
 ### 容器的暂停和恢复
 
@@ -492,11 +499,11 @@ curL[容器IP]:8000
 Ctrl+C
 ```
 
-![image-20230905103701392](深入浅出docker应用-Docker容器入门.assets/image-20230905103701392.png)
+![image-20230905103701392](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115130478163_735_image-20230905103701392.png)
 
 2. 通过`docker unpause`命令恢复容器运行，测试http服务，发现已经恢复访问。
 
-![image-20230905103928331](深入浅出docker应用-Docker容器入门.assets/image-20230905103928331.png)
+![image-20230905103928331](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115135872273_522_image-20230905103928331.png)
 
 ### 容器的停止，重启和删除
 
@@ -514,7 +521,7 @@ docker stop ubuntu-3
 docker ps -a 
 ```
 
-![image-20230905104252646](深入浅出docker应用-Docker容器入门.assets/image-20230905104252646.png)
+![image-20230905104252646](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115141294293_905_image-20230905104252646.png)
 
 2. 容器的重启
 
@@ -529,7 +536,7 @@ docker top ubuntu-3
 curl [容器IP]:8000
 ```
 
-![image-20230905104419168](深入浅出docker应用-Docker容器入门.assets/image-20230905104419168.png)
+![image-20230905104419168](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115145758825_431_image-20230905104419168.png)
 
 3. 容器的删除
 
@@ -550,4 +557,4 @@ docker ps -a
 
 我们会发现容器已经被删除了。
 
-![image-20230905104646099](深入浅出docker应用-Docker容器入门.assets/image-20230905104646099.png)
+![image-20230905104646099](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115148957414_272_image-20230905104646099.png)
