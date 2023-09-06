@@ -1,3 +1,10 @@
+---
+title: 深入浅出Docker应用-Docker容器镜像
+categories: 笔记
+tags:
+  - Docker
+date: 2023-09-06 11:58:42
+---
 # 深入浅出docker应用-Docker容器镜像
 
 ## 容器镜像管理命令
@@ -15,7 +22,7 @@ docker pull debian
 docker images
 ```
 
-![image-20230905111740289](深入浅出docker应用-Docker容器镜像.assets/image-20230905111740289.png)
+![image-20230905111740289](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115336118310_589_image-20230905111740289.png)
 
 2. 镜像的查看
 
@@ -25,7 +32,7 @@ docker images
 docker inspect debian
 ```
 
-![image-20230905111840241](深入浅出docker应用-Docker容器镜像.assets/image-20230905111840241.png)
+![image-20230905111840241](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115340457256_880_image-20230905111840241.png)
 
 3. 镜像的删除
 
@@ -37,7 +44,7 @@ docker rm -f debian-3
 docker images
 ```
 
-![image-20230905112209925](深入浅出docker应用-Docker容器镜像.assets/image-20230905112209925.png)
+![image-20230905112209925](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115345002211_731_image-20230905112209925.png)
 
 要注意的是`docker rmi`无法删除已经创建了容器的镜像，如果需要删除需要先停止相关的容器，并添加`--force`参数。接下来我们再来测试通过镜像创建容器，然后在删除容器之后删除`debian`镜像。
 
@@ -46,7 +53,7 @@ docker rmi --force debian
 docker images`
 ```
 
-![image-20230905112249614](深入浅出docker应用-Docker容器镜像.assets/image-20230905112249614.png)
+![image-20230905112249614](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115349316003_313_image-20230905112249614.png)
 
 ### 镜像的保存和加载
 
@@ -63,7 +70,7 @@ docker save -o images.tar nginx hello-world
 ll images.tar
 ```
 
-![image-20230905112510946](深入浅出docker应用-Docker容器镜像.assets/image-20230905112510946.png)
+![image-20230905112510946](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115604979456_700_image-20230905112510946.png)
 
 2. 删除已有镜像
 
@@ -100,7 +107,7 @@ docker exec python-1 bash -c "echo snapshot > snapshot.txt"
 docker exec python-1 bash -c "cat snapshot.txt"`
 ```
 
-![image-20230905113832779](深入浅出docker应用-Docker容器镜像.assets/image-20230905113832779.png)
+![image-20230905113832779](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115609558385_183_image-20230905113832779.png)
 
 2. 容器快照的导出
 
@@ -111,7 +118,7 @@ docker export python-1 > python-snapshot.tar
 ll python-snapshot.tar
 ```
 
-![image-20230905114017315](深入浅出docker应用-Docker容器镜像.assets/image-20230905114017315.png)
+![image-20230905114017315](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115614943354_328_image-20230905114017315.png)
 
 3. 容器快照的导入
 
@@ -128,7 +135,7 @@ docker run -itd --name snapshot python-snapshot /bin/bash
 docker exec snapshot cat snapshot.txt
 ```
 
-![image-20230905114307524](深入浅出docker应用-Docker容器镜像.assets/image-20230905114307524.png)
+![image-20230905114307524](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115620362425_973_image-20230905114307524.png)
 
 ### 镜像内部层次关系
 
@@ -144,13 +151,13 @@ docker exec snapshot cat snapshot.txt
 docker inspect -f "{\"Id\":{{json .Id}},\"RepoTags\":{{json .RepoTags}}}" python | jq
 ```
 
-![image-20230905114742181](深入浅出docker应用-Docker容器镜像.assets/image-20230905114742181.png)
+![image-20230905114742181](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115623529198_693_image-20230905114742181.png)
 
 2. 镜像的层次关系
 
 当docker设计镜像底层结构时，为了节约存储控件，会将镜像设计成只读的分层结构。这样每一层只记录和前一层的文件差别。如果两个不同的镜像底层使用了相同的镜像层，则只需要存储一份就可以。这样就大大减小了冗余镜像存储的情况。
 
-![image-20230905114904603](深入浅出docker应用-Docker容器镜像.assets/image-20230905114904603.png)
+![image-20230905114904603](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115627866613_645_image-20230905114904603.png)
 
 通过`docker inspect`命令我们同样可以查看镜像的层次信息。通过在镜像信息的`.RootFS.Layers`位置，保存的就是镜像的层次信息。通过下面的命令，我们发现，`python`镜像中包含了8层。
 
@@ -158,17 +165,17 @@ docker inspect -f "{\"Id\":{{json .Id}},\"RepoTags\":{{json .RepoTags}}}" python
 docker inspect -f "{{json .RootFS.Layers}}" python | jq
 ```
 
-![image-20230905115015870](深入浅出docker应用-Docker容器镜像.assets/image-20230905115015870.png)
+![image-20230905115015870](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115633796078_312_image-20230905115015870.png)
 
 3. 普通镜像和快照镜像的区别
 
 接下来我们来查看普通镜像和快照镜像直接的层次区别，通过观察我们可以发现，通过`docker import`导入的镜像快照。会将所有的层压缩成一层。
 
-![image-20230905115304575](深入浅出docker应用-Docker容器镜像.assets/image-20230905115304575.png)
+![image-20230905115304575](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115637121367_978_image-20230905115304575.png)
 
 同时我们通过`docker images`和`ls -ll`命令我们可以看到快照镜像，快照镜像虽然体积较大，有比较多的冗余内容，但是不会依赖其他的镜像；因此比较适合导出到文件和导入的操作。
 
-![image-20230905115404487](深入浅出docker应用-Docker容器镜像.assets/image-20230905115404487.png)
+![image-20230905115404487](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115642297654_383_image-20230905115404487.png)
 
 ## 容器镜像的制作-commit
 
@@ -184,7 +191,7 @@ docker inspect -f "{{json .RootFS.Layers}}" python | jq
 
 除此之外，我们再使用`docker inspect` 命令查看基础容器镜像的层信息
 
-![image-20230905121132394](深入浅出docker应用-Docker容器镜像.assets/image-20230905121132394.png)
+![image-20230905121132394](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115647711148_393_image-20230905121132394.png)
 
 2. 查看容器修改内容
 
@@ -195,7 +202,7 @@ docker exec ubuntu-commit apt-get update
 docker diff ubuntu-commit
 ```
 
-![image-20230905121240110](深入浅出docker应用-Docker容器镜像.assets/image-20230905121240110.png)
+![image-20230905121240110](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115653000478_838_image-20230905121240110.png)
 
 3. 生成新的镜像
 
@@ -208,7 +215,7 @@ docker commit ubuntu-commit ub/commit
 docker images
 ```
 
-![image-20230905121504361](深入浅出docker应用-Docker容器镜像.assets/image-20230905121504361.png)
+![image-20230905121504361](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115657893023_850_image-20230905121504361.png)
 
 4. 查看新镜像的层
 
@@ -218,7 +225,7 @@ docker images
 docker inspect -f "{{json .RootFS.Layers}}"  ub/commit | jq
 ```
 
-![image-20230905121727324](深入浅出docker应用-Docker容器镜像.assets/image-20230905121727324.png)
+![image-20230905121727324](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115703246580_756_image-20230905121727324.png)
 
 ### 部署私人镜像仓库
 
@@ -251,7 +258,7 @@ netstat -tunple | grep 5000
 > - `-l`: 仅显示监听状态的端口。
 > - `-e`: 显示详细的扩展信息。
 
-![image-20230905122954351](深入浅出docker应用-Docker容器镜像.assets/image-20230905122954351.png)
+![image-20230905122954351](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115706345292_473_image-20230905122954351.png)
 
 3. 测试服务
 
@@ -261,7 +268,7 @@ netstat -tunple | grep 5000
 curl 127.0.0.1:5000/v2/_catalog
 ```
 
-![image-20230905123129251](深入浅出docker应用-Docker容器镜像.assets/image-20230905123129251.png)
+![image-20230905123129251](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115712465251_580_image-20230905123129251.png)
 
 ### 向私有仓库中推送镜像
 
@@ -276,7 +283,7 @@ docker tag ub/commit 127.0.0.1:5000/ub/commit
 docker images
 ```
 
-![image-20230905123255932](深入浅出docker应用-Docker容器镜像.assets/image-20230905123255932.png)
+![image-20230905123255932](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115718659476_124_image-20230905123255932.png)
 
 2. 向仓库推送镜像
 
@@ -286,7 +293,7 @@ docker images
 docker push 127.0.0.1:5000/ub/commit:latest
 ```
 
-![image-20230905123356587](深入浅出docker应用-Docker容器镜像.assets/image-20230905123356587.png)
+![image-20230905123356587](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115722159957_760_image-20230905123356587.png)
 
 3. 通过私有仓库API验证推送
 
@@ -297,7 +304,7 @@ curl 127.0.0.1:5000/v2/_catalog
 curl 127.0.0.1:5000/v2/ub/commit/tags/list
 ```
 
-![image-20230905123429963](深入浅出docker应用-Docker容器镜像.assets/image-20230905123429963.png)
+![image-20230905123429963](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115726481615_338_image-20230905123429963.png)
 
 ### 从私有仓库中拉取镜像
 
@@ -310,7 +317,7 @@ docker rmi ub/commit
 docker rmi 127.0.0.1:5000/ub/commit
 ```
 
-![image-20230905123531029](深入浅出docker应用-Docker容器镜像.assets/image-20230905123531029.png)
+![image-20230905123531029](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115731763472_727_image-20230905123531029.png)
 
 2. 从私有仓库中拉取镜像
 
@@ -321,7 +328,7 @@ docker pull 127.0.0.1:5000/ub/commit
 docker images
 ```
 
-![image-20230905145350810](深入浅出docker应用-Docker容器镜像.assets/image-20230905145350810.png)
+![image-20230905145350810](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115735113092_916_image-20230905145350810.png)
 
 3. 查看本地镜像信息
 
@@ -333,7 +340,7 @@ docker inspect -f \
 127.0.0.1:5000/ub/commit | jq
 ```
 
-![image-20230905123713888](深入浅出docker应用-Docker容器镜像.assets/image-20230905123713888.png)
+![image-20230905123713888](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115738615710_639_image-20230905123713888.png)
 
 ## 容器镜像的制作-build
 
@@ -370,9 +377,9 @@ docker build -t ub/build .
 docker images
 ```
 
-![image-20230905150014762](深入浅出docker应用-Docker容器镜像.assets/image-20230905150014762.png)
+![image-20230905150014762](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115742023909_762_image-20230905150014762.png)
 
-![image-20230905150038126](深入浅出docker应用-Docker容器镜像.assets/image-20230905150038126.png)
+![image-20230905150038126](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115747150545_234_image-20230905150038126.png)
 
 3. Dockerfile命令列表
 
@@ -449,7 +456,7 @@ ADD https://www.aliyun.com/robots.txt robots.txt
 docker build -t img6-1 .
 ```
 
-![image-20230905150654738](深入浅出docker应用-Docker容器镜像.assets/image-20230905150654738.png)
+![image-20230905150654738](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115755964064_755_image-20230905150654738.png)
 
 1. 验证容器镜像
 
@@ -463,7 +470,7 @@ docker exec container6-1 pwd
 docker exec container6-1 cat robots.txt
 ```
 
-![image-20230905150901490](深入浅出docker应用-Docker容器镜像.assets/image-20230905150901490.png)
+![image-20230905150901490](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115800290600_894_image-20230905150901490.png)
 
 我们继续验证其他目录的文件。这里我们使用了`docker exec container6-1 ls`和`docker exec container6-1 cat`命令。来查看文件列表和文件内容。会发现目录中的3个文件和内容符合期望
 
@@ -474,7 +481,7 @@ docker exec container6-1 cat ../info.txt
 docker exec container6-1 cat ../tar.txt
 ```
 
-![image-20230905150957871](深入浅出docker应用-Docker容器镜像.assets/image-20230905150957871.png)
+![image-20230905150957871](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115806535609_183_image-20230905150957871.png)
 
 ### Dockerfile命令详解-2
 
@@ -525,7 +532,7 @@ CMD echo $IMG_STRING
 docker build -t img6-2 dir6-2
 ```
 
-![image-20230905151434617](深入浅出docker应用-Docker容器镜像.assets/image-20230905151434617.png)
+![image-20230905151434617](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115810025076_444_image-20230905151434617.png)
 
 2. CMD和ENTRYPOINT命令讲解
 
@@ -554,7 +561,7 @@ Dockerfile编写完毕后，然后使用docker build编译容器镜像
 docker build -t img6-3 dir6-3
 ```
 
-![image-20230905152110713](深入浅出docker应用-Docker容器镜像.assets/image-20230905152110713.png)
+![image-20230905152110713](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115815811340_658_image-20230905152110713.png)
 
 3. 验证容器镜像
 
@@ -565,7 +572,7 @@ docker run img6-2
 docker run img6-2 ls -ll
 ```
 
-![image-20230905153928461](深入浅出docker应用-Docker容器镜像.assets/image-20230905153928461.png)
+![image-20230905153928461](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115820729711_808_image-20230905153928461.png)
 
 接下来我们来验证编译好的img6-3容器镜像，我们通过`docker run`启动镜像，然后验证容器中的内容。
 
@@ -575,7 +582,7 @@ docker run --entrypoint echo img6-3 "手动设置ENTRYPOINT和CMD"
 docker run img6-3 -c "echo 手动设置CMD参数"
 ```
 
-![image-20230905152521488](深入浅出docker应用-Docker容器镜像.assets/image-20230905152521488.png)
+![image-20230905152521488](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115826074004_456_image-20230905152521488.png)
 
 ### 容器镜像的层次关系
 
@@ -585,13 +592,13 @@ docker run img6-3 -c "echo 手动设置CMD参数"
 
 我们也用`docker inspect`命令来查看一下镜像`img6-1`的层次信息，结果会发现`docker build`在基础镜像之上构建多个了新的镜像。
 
-![image-20230905154527625](深入浅出docker应用-Docker容器镜像.assets/image-20230905154527625.png)
+![image-20230905154527625](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115829877225_831_image-20230905154527625.png)
 
 2. 查看镜像历史
 
 通过`docker build`生成的镜像。除了`docker inspcet`之外，还可以通过`docker history`命令来查看通过`Dockerfile`定义的镜像的生成方式。我们可以看到`docker history`命令输出了镜像构建的过程信息，通过这一信息我们能比较清晰的看到镜像作者在制作镜像时的具体操作。
 
-![image-20230905154617548](深入浅出docker应用-Docker容器镜像.assets/image-20230905154617548.png)
+![image-20230905154617548](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115833217733_117_image-20230905154617548.png)
 
 3. 镜像层次和镜像历史之间的关系
 
@@ -607,4 +614,4 @@ docker inspect -f "{{json .RootFS.Layers}}" img6-3 | jq
 docker inspect -f "{{json .RootFS.Layers}}" ubuntu | jq
 ```
 
-![image-20230905154829449](深入浅出docker应用-Docker容器镜像.assets/image-20230905154829449.png)
+![image-20230905154829449](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/20230906115838928038_319_image-20230905154829449.png)
