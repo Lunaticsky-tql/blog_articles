@@ -1,3 +1,10 @@
+---
+title: 深入浅出Docker应用-Docker Compose实战
+categories: 笔记
+tags:
+  - Docker
+date: 2023-09-06 14:16:11
+---
 # 深入浅出Docker应用-Docker Compose实战
 
 ## Docker Compose入门
@@ -19,7 +26,7 @@ yum install -y docker-compose-plugin
 docker compose version
 ```
 
-![image-20230906120028310](深入浅出Docker应用-Docker Compose实战.assets/image-20230906120028310.png)
+![image-20230906120028310](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906140854608011_980_image-20230906120028310.png)
 
 2. 单独应用安装
 
@@ -56,7 +63,7 @@ docker build -t yml/py .
 docker images
 ```
 
-![image-20230906120814383](深入浅出Docker应用-Docker Compose实战.assets/image-20230906120814383.png)
+![image-20230906120814383](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906140858972702_400_image-20230906120814383.png)
 
 2. YML转化为JSON
 
@@ -69,7 +76,7 @@ echo id: '10' > demo.yml
 docker run -i --rm yml/py python 2json.py < demo.yml
 ```
 
-![image-20230906120838553](深入浅出Docker应用-Docker Compose实战.assets/image-20230906120838553.png)
+![image-20230906120838553](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906140903420195_222_image-20230906120838553.png)
 
 3. JSON转化为YML
 
@@ -80,7 +87,7 @@ echo \{\"name\":\"aliyun\",\"age\":100} > demo.json
 docker run -i --rm yml/py python 2yml.py < demo.json 
 ```
 
-![image-20230906120923498](深入浅出Docker应用-Docker Compose实战.assets/image-20230906120923498.png)
+![image-20230906120923498](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906140906842553_579_image-20230906120923498.png)
 
 ### YML格式配置文件
 
@@ -114,7 +121,7 @@ cat demo1.yml
 docker run -i --rm yml/py python 2json.py < demo1.yml 
 ```
 
-![image-20230906121133060](深入浅出Docker应用-Docker Compose实战.assets/image-20230906121133060.png)
+![image-20230906121133060](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141349874042_518_image-20230906121133060.png)
 
 2. YML中的纯量
 
@@ -137,7 +144,7 @@ cat demo2.yml
 docker run -i --rm yml/py python 2json.py < demo2.yml
 ```
 
-![image-20230906121351872](深入浅出Docker应用-Docker Compose实战.assets/image-20230906121351872.png)
+![image-20230906121351872](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141356359881_590_image-20230906121351872.png)
 
 1. YML中的数组
 
@@ -159,7 +166,7 @@ cat demo3.yml
 docker run -i --rm yml/py python 2json.py < demo3.yml
 ```
 
-![image-20230906121553457](深入浅出Docker应用-Docker Compose实战.assets/image-20230906121553457.png)
+![image-20230906121553457](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141400821811_243_image-20230906121553457.png)
 
 ### Docker Compose快速上手
 
@@ -197,7 +204,7 @@ docker compose up -d
 docker ps
 ```
 
-![image-20230906122001303](深入浅出Docker应用-Docker Compose实战.assets/image-20230906122001303.png)
+![image-20230906122001303](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141406085546_790_image-20230906122001303.png)
 
 ## Docker Compose部署案例
 
@@ -244,7 +251,7 @@ volumes:
 docker compose up -d
 ```
 
-![image-20230906123052607](深入浅出Docker应用-Docker Compose实战.assets/image-20230906123052607.png)
+![image-20230906123052607](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141411787491_209_image-20230906123052607.png)
 
 2. 类Docker命令
 
@@ -259,7 +266,7 @@ docker compose cp docker-compose.yml db:/root/
 docker compose exec db bin/bash -c "cat /root/docker-compose.yml"
 ```
 
-![image-20230906123259414](深入浅出Docker应用-Docker Compose实战.assets/image-20230906123259414.png)
+![image-20230906123259414](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141417586371_108_image-20230906123259414.png)
 
 3. 容器的启停删除
 
@@ -275,7 +282,7 @@ docker compose restart
 docker compose down
 ```
 
-![image-20230906123454662](深入浅出Docker应用-Docker Compose实战.assets/image-20230906123454662.png)
+![image-20230906123454662](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141423088385_967_image-20230906123454662.png)
 
 ### 部署WordPress论坛
 
@@ -392,7 +399,7 @@ services:
       WORDPRESS_DB_PASSWORD: *wp_passwd   
 ```
 
-![image-20230906124155038](深入浅出Docker应用-Docker Compose实战.assets/image-20230906124155038.png)
+![image-20230906124155038](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141429798156_187_image-20230906124155038.png)
 
 4. 启动容器
 
@@ -404,7 +411,7 @@ docker compose -f db.yml -f cache.yml -f app.yml -p wp up -d
 
 > 注：`-p wp`: 指定了项目名称（project name）`wp`
 
-![image-20230906124528944](深入浅出Docker应用-Docker Compose实战.assets/image-20230906124528944.png)
+![image-20230906124528944](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141434316934_189_image-20230906124528944.png)
 
 ### 初始化WordPress论坛
 
@@ -416,7 +423,7 @@ docker compose -f db.yml -f cache.yml -f app.yml -p wp up -d
 
 在浏览器中输入`http://[ECS公网地址]:8000`，即可进入WordPress初始化界面。
 
-![image-20230906124731571](深入浅出Docker应用-Docker Compose实战.assets/image-20230906124731571.png)
+![image-20230906124731571](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141438141138_443_image-20230906124731571.png)
 
 2. 初始化WordPress
 
@@ -424,35 +431,35 @@ docker compose -f db.yml -f cache.yml -f app.yml -p wp up -d
 
 继续配置wordpress的相关信息，输入论坛名称，用户名，密码等，在邮箱输入栏输入符合标准的邮箱格式即可。然后按"安装WordPress"
 
-![image-20230906124928415](深入浅出Docker应用-Docker Compose实战.assets/image-20230906124928415.png)
+![image-20230906124928415](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141444671037_311_image-20230906124928415.png)
 
 3. 登录WordPress
 
 安装之后点击登录，即可进入登录界面，在登陆界面中输入上一个步骤填写的用户密码并点击登录。
 
-<img src="深入浅出Docker应用-Docker Compose实战.assets/image-20230906125010078.png" alt="image-20230906125010078" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141450295097_479_image-20230906125010078.png" alt="image-20230906125010078" width="50%" height="50%" />
 
 登录之后即可进入wordpress管理后台。后台界面主要由管理员使用。
 
-![image-20230906125040580](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125040580.png)
+![image-20230906125040580](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141455440508_502_image-20230906125040580.png)
 
 接下来我们进入wordpress前台浏览界面。输入网址 `http://[ECS公网地址]:8000`。出现如下浏览界面即说明wordpress安装成功。
 
-![image-20230906125109079](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125109079.png)
+![image-20230906125109079](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141500006324_531_image-20230906125109079.png)
 
 ### 在WordPress中安装插件
 
 1. 插件管理
 
-![image-20230906125251276](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125251276.png)
+![image-20230906125251276](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141507077816_757_image-20230906125251276.png)
 
 2. 安装reids插件
 
-![image-20230906125321678](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125321678.png)
+![image-20230906125321678](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141511708977_268_image-20230906125321678.png)
 
 然后点“启用”
 
-![image-20230906125416859](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125416859.png)
+![image-20230906125416859](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141517641595_463_image-20230906125416859.png)
 
 
 切换至终端，执行如下命令验证插件生效。
@@ -463,7 +470,7 @@ docker exec -it wp-cache-1 redis-cli
 keys *
 ```
 
-![image-20230906125527715](深入浅出Docker应用-Docker Compose实战.assets/image-20230906125527715.png)
+![image-20230906125527715](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141522028216_638_image-20230906125527715.png)
 
 ## YML配置文件的常用属性
 
@@ -523,7 +530,7 @@ docker port web
 docker inspect -f "{{json .Mounts}}"  db | jq
 ```
 
-![image-20230906132436722](深入浅出Docker应用-Docker Compose实战.assets/image-20230906132436722.png)
+![image-20230906132436722](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141525957802_776_image-20230906132436722.png)
 
 3. 容器状态查询
 
@@ -537,7 +544,7 @@ docker compose top
 docker compose images
 ```
 
-![image-20230906133510118](深入浅出Docker应用-Docker Compose实战.assets/image-20230906133510118.png)
+![image-20230906133510118](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141532886509_703_image-20230906133510118.png)
 
 4. 容器的删除
 
@@ -549,7 +556,7 @@ docker compose images
 docker compose down
 ```
 
-![image-20230906133558164](深入浅出Docker应用-Docker Compose实战.assets/image-20230906133558164.png)
+![image-20230906133558164](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141538989320_659_image-20230906133558164.png)
 
 ###  YML的常用配置项目
 
@@ -596,7 +603,7 @@ networks:
 docker compose -f web.yml -p web up -d
 ```
 
-![image-20230906134113946](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134113946.png)
+![image-20230906134113946](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141545186341_141_image-20230906134113946.png)
 
 2. 创建Project并验证
 
@@ -607,7 +614,7 @@ docker inspect -f '{"Tty":{{.Config.Tty}},"OpenStdin":{{.Config.OpenStdin}}}' sh
 docker inspect -f "{{json .NetworkSettings.Networks}}" sh | jq
 ```
 
-![image-20230906134131894](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134131894.png)
+![image-20230906134131894](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141548725400_786_image-20230906134131894.png)
 
 3. 查看配置信息
 
@@ -618,7 +625,7 @@ docker compose -f web.yml -p web convert busybox
 docker compose -f web.yml -p web convert python
 ```
 
-![image-20230906134142775](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134142775.png)
+![image-20230906134142775](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141552348830_501_image-20230906134142775.png)
 
 ### YML的其他配置项目
 
@@ -655,7 +662,7 @@ docker compose -f replicas.yml -p replicas up -d
 docker compose -f replicas.yml -p replicas ps
 ```
 
-![image-20230906134411157](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134411157.png)
+![image-20230906134411157](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141557051770_456_image-20230906134411157.png)
 
 2. 启动顺序
 
@@ -691,7 +698,7 @@ services:
 docker compose -f dependson.yml -p dependson up -d
 ```
 
-![image-20230906134537758](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134537758.png)
+![image-20230906134537758](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141600332437_952_image-20230906134537758.png)
 
 3. 重启策略
 
@@ -721,7 +728,7 @@ docker compose -f restart.yml -p restart up -d
 docker compose -f restart.yml -p restart ps
 ```
 
-![image-20230906134857664](深入浅出Docker应用-Docker Compose实战.assets/image-20230906134857664.png)
+![image-20230906134857664](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141603517229_285_image-20230906134857664.png)
 
 > 注：蓝框中已启动9秒而非50+秒，说明中间重启过
 
@@ -818,5 +825,5 @@ curl 127.0.0.1:8080
 curl 127.0.0.1:8080/host
 ```
 
-![image-20230906135657253](深入浅出Docker应用-Docker Compose实战.assets/image-20230906135657253.png)
+![image-20230906135657253](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%20Compose%E5%AE%9E%E6%88%98/20230906141609065118_414_image-20230906135657253.png)
 
