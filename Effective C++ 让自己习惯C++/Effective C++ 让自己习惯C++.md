@@ -1,3 +1,10 @@
+---
+title: Effective C++ 让自己习惯C++
+categories: 笔记
+tags:
+  - C++
+date: 2023-09-18 22:22:08
+---
 # Effective C++-让自己习惯 C++
 
 ### 总览
