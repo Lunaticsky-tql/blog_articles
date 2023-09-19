@@ -1,3 +1,10 @@
+---
+title: Effective C++-资源管理
+categories: 笔记
+tags:
+  - C++
+date: 2023-09-19 10:46:30
+---
 # Effective C++-资源管理
 
 ### 总览
