@@ -1,3 +1,10 @@
+---
+title: Effective C++ - Item49-52 - 定制new和delete
+categories: 笔记
+tags:
+  - EffectiveC++
+date: 2023-09-21 12:21:02
+---
 # Effective C++ - Item49-52 - 定制new和delete
 
 ### 总览
