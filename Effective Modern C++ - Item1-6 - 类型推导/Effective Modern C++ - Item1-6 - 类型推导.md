@@ -1,3 +1,10 @@
+---
+title: Effective Modern C++ - Item1-6 - 类型推导
+categories: 笔记
+tags:
+  - EffectiveC++
+date: 2023-09-25 14:27:09
+---
 # Effective Modern C++ - Item1-6- 类型推导
 
 ## 总览
