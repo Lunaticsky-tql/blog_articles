@@ -1,3 +1,10 @@
+---
+title: 如何编写 Hammerspoon Spoon 插件
+categories: 小寄巧
+tags:
+  - Hammerspoon
+date: 2023-10-03 17:04:08
+---
 # 如何编写 Hammerspoon Spoon 插件
 
 [TOC]
