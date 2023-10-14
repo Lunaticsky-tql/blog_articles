@@ -1,8 +1,15 @@
+---
+title: 一组数据表练习Mysql查询
+categories: 笔记
+tags:
+  - 数据库
+date: 2023-10-14 15:56:32
+---
 # 一组数据表练习Mysql查询
 
 ## 数据表格式
 
-![image-20231014154116950](基于GaussDB的查询练习.assets/image-20231014154116950.png)
+![image-20231014154116950](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155457883160_747_image-20231014154116950.png)
 
 数据库模式如下（分别为Department,Employee,Category,Project,Workson):
 
@@ -40,7 +47,7 @@ WHERE employee.empname LIKE '李%' AND employee.depid =department.depid
 ORDER BY age DESC 
 ```
 
-![image-20220424163426426](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424163426426.png)
+![image-20220424163426426](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155503258329_826_image-20220424163426426.png)
 
 3.给出每位职员参与项目的最高预算和最低预算（empname，highestbudget，lowestbudget）
 
@@ -51,7 +58,7 @@ WHERE project.proid =workson.proid AND employee.empid=workson.empid
 GROUP BY empname
 ```
 
-![image-20220424163244361](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424163244361.png)
+![image-20220424163244361](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155506469724_414_image-20220424163244361.png)
 
 4.给出所有项目超过一个的员工的id和参加的项目个数（empid, num）
 
@@ -62,7 +69,7 @@ having count(proid)>1
 group by empid
 ```
 
-![image-20220424163912198](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424163912198.png)
+![image-20220424163912198](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155511552514_152_image-20220424163912198.png)
 
 5.给出项目种类号为“c2”且预算最多的项目。（proid，projectname，budget）
 
@@ -72,7 +79,7 @@ from project
 where budget>=all(select budget from project where catid ='c2') and catid='c2'
 ```
 
-![image-20220424164944185](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424164944185.png)
+![image-20220424164944185](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155516353726_684_image-20220424164944185.png)
 
 6.给出参加“产品推广”项目，但不担任职位的员工的员工信息，（empid,empname，age,sex.depid）
 
@@ -82,7 +89,7 @@ from employee
 where empid in(select empid from workson where proid=(select proid from project where projectname='产品推广') and job is null)
 ```
 
-![image-20220424165835471](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424165835471.png)
+![image-20220424165835471](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155520977072_206_image-20220424165835471.png)
 
 7.给出工号为“10102”的员工每类项目的参加总数，若没有参加过某类项目，则参加项目总数显示为0（catid，proNum）
 
@@ -94,7 +101,7 @@ group by catid
 order by catid
 ```
 
-![image-20220424172015697](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424172015697.png)
+![image-20220424172015697](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155524185316_831_image-20220424172015697.png)
 
 但是随后发现这种方式并不能满足”若没有参加过某类项目，则参加项目总数显示为0“的要求。
 
@@ -111,7 +118,7 @@ on category.catid=subtable.catid
 
 以10211为例进行了测试：成功。
 
-![image-20220424212513530](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424212513530.png)
+![image-20220424212513530](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155528947182_726_image-20220424212513530.png)
 
 [参考链接](https://blog.csdn.net/evasunny2008/article/details/52525196?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.pc_relevant_default&utm_relevant_index=1)
 
@@ -141,7 +148,7 @@ WHERE sex = '女'
 
 刚刚发现了格式化的功能。
 
-![image-20220424214552653](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424214552653.png)
+![image-20220424214552653](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155533441829_214_image-20220424214552653.png)
 
 9.给出有30岁以上男性员工的省份名称和该省男员工最大年龄，结果按最大年龄升序排序
 
@@ -155,7 +162,7 @@ HAVING MAX(age) > 30
 ORDER BY MAX(age)
 ```
 
-![image-20220424221636001](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424221636001.png)
+![image-20220424221636001](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155538165850_847_image-20220424221636001.png)
 
 10.给出在广州工作的、参加“'产品推广'”项目的职员id、姓名及他们参加的项目个数（empid, empname, procnt）
 
@@ -170,7 +177,7 @@ WHERE location = '广州'
 GROUP BY employee.empid
 ```
 
-![image-20220424223306078](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20220424223306078.png)
+![image-20220424223306078](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155542227505_244_image-20220424223306078.png)
 
 ---
 
@@ -187,7 +194,7 @@ from employee e1,employee e2 where e1.depid=e2.depid and e1.empname<e2.empname
 
 > 利用小于关系去重
 
-![image-20231012203847118](基于GaussDB的查询练习.assets/image-20231012203847118.png)
+![image-20231012203847118](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155547176726_653_image-20231012203847118.png)
 
 2. 查找部门中只有一名员工的员工姓名(empname)
 
@@ -198,7 +205,7 @@ where not exists (select * from employee
 where depid=e1.depid and empname<>e1.empname)
 ```
 
-![image-20231012205231700](基于GaussDB的查询练习.assets/image-20231012205231700.png)
+![image-20231012205231700](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155550880799_733_image-20231012205231700.png)
 
 3. 2020年12月21日之后入职的员工所参与项目的平均预算（empid，avgngbudget）
 
@@ -210,7 +217,7 @@ and enterdate >'2020-12-21 00:00'
 group by empid
 ```
 
-![image-20231012212055411](基于GaussDB的查询练习.assets/image-20231012212055411.png)
+![image-20231012212055411](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155555162156_749_image-20231012212055411.png)
 
 4. 如果担任过职员的员工所参与的所有项目的平均预算大于110000则返回结果为职员的名字(empname)，与对应的平均项目预算值avg(budget)
 
@@ -222,7 +229,7 @@ group by empname
 having avg(budget)>110000;
 ```
 
-![image-20231012212759491](基于GaussDB的查询练习.assets/image-20231012212759491.png)
+![image-20231012212759491](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155559791125_456_image-20231012212759491.png)
 
 > 典型错误：
 >
@@ -234,7 +241,7 @@ having avg(budget)>110000;
 > having avg(budget)>110000;
 > ````
 >
-> ![image-20231012212955932](基于GaussDB的查询练习.assets/image-20231012212955932.png)
+> ![image-20231012212955932](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155604301445_444_image-20231012212955932.png)
 >
 > 错误原因：这时候avg只计算了参与角色为职员的项目。
 
@@ -248,7 +255,7 @@ having avg(budget)>110000;
    	where p1.budget<p2.budget and p1.catid=p2.catid)
 ```
 
-![image-20231014141406527](基于GaussDB的查询练习.assets/image-20231014141406527.png)
+![image-20231014141406527](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155607606479_529_image-20231014141406527.png)
 
 > 注：这是经典的分组TopK问题。
 >
@@ -268,7 +275,7 @@ dense_rank() over(partition by c.catid order by budget desc)
 from category c join project p on c.catid=p.catid
 ```
 
-![image-20231014142403857](基于GaussDB的查询练习.assets/image-20231014142403857.png)
+![image-20231014142403857](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155610257288_208_image-20231014142403857.png)
 
 最终得到可行SQL语句：
 
@@ -298,7 +305,7 @@ from category c natural join project p
 
 得到下面的中间结果。
 
-![image-20231014150850190](基于GaussDB的查询练习.assets/image-20231014150850190.png)
+![image-20231014150850190](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155615661381_775_image-20231014150850190.png)
 
 作为中位数，其rank应位于`[n/2,n/2+1]`之间。
 
@@ -318,7 +325,7 @@ from category c natural join project p
 where rk>=n/2 and rk<=n/2+1
 ```
 
-![image-20231014152206322](基于GaussDB的查询练习.assets/image-20231014152206322.png)
+![image-20231014152206322](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155619109089_940_image-20231014152206322.png)
 
 7. 查找每个项目类别超过其内项目平均预算的项目？（catname，projectname)
 
@@ -335,7 +342,7 @@ where budget >=(select avg(budget)
                group by y.catid )
 ```
 
-![image-20231014153658251](基于GaussDB的查询练习.assets/image-20231014153658251.png)
+![image-20231014153658251](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155623802818_678_image-20231014153658251.png)
 
 8. 参与过所有项目的员工的姓名（empname）。
 
@@ -346,4 +353,4 @@ where not exists(select * from project
                                    where empid=employee.empid and proid=project.proid))
 ```
 
-![image-20231014155355539](基于GaussDB的查询练习.assets/image-20231014155355539.png)
+![image-20231014155355539](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155627876393_620_image-20231014155355539.png)
