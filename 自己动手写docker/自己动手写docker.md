@@ -1,3 +1,10 @@
+---
+title: 自己动手写docker
+categories: 笔记
+tags:
+  - 云原生
+date: 2024-07-02 23:28:21
+---
 # 自己动手写docker
 
 ## docker run
