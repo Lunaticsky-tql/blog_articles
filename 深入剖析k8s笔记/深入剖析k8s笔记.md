@@ -1,8 +1,15 @@
+---
+title: 深入剖析k8s笔记
+categories: 笔记
+tags:
+  - 云原生
+date: 2024-07-02 23:11:59
+---
 ### 整体架构
 
 https://blog.frognew.com/2021/08/relearning-k8s-02.html
 
-![image-20240407183224098](k8s.assets/image-20240407183224098.png)
+![image-20240407183224098](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/深入剖析k8s笔记/20240702231149380463_679_image-20240407183224098.png)
 
 #### 当你创建了一个 Deployment 时，Kubernetes 内部发生了什么?
 
@@ -58,7 +65,7 @@ https://freegeektime.com/100015201/40092/
 
 所以，在 Kubernetes 项目里，Pod 的实现需要使用一个中间容器，这个容器叫作 Infra 容器。在这个 Pod 中，Infra 容器永远都是第一个被创建的容器，而其他用户定义的容器，则通过 Join Network Namespace 的方式，与 Infra 容器关联在一起。这样的组织关系，可以用下面这样一个示意图来表达：
 
-<img src="k8s.assets/image-20240409115032186.png" alt="image-20240409115032186" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/深入剖析k8s笔记/20240702231154886419_779_image-20240409115032186.png" alt="image-20240409115032186" width="50%" height="50%" />
 
 对于 Pod 里的容器 A 和容器 B 来说：
 
